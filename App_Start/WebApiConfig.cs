@@ -25,7 +25,7 @@ namespace RestApi
             builder
                 .RegisterApiControllers(Assembly.GetExecutingAssembly());
 
-            builder
+/*            builder
                 .RegisterType<UserService>()
                 .Keyed<IUserService>(UserServiceType.UserService)
                 .SingleInstance();
@@ -38,14 +38,13 @@ namespace RestApi
             builder
                 .RegisterType<UserRepository>()
                 .As<IUserRepository>()
-                .SingleInstance();
-            /*
+                .SingleInstance();*/
+
             builder
-                .RegisterModule(new RepositoryModule());
+                .RegisterModule<RepositoryModule>();
             builder
-                .RegisterModule(new ServiceModule()); 
-                
-             */
+                .RegisterModule<ServiceModule>(); 
+
 
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
