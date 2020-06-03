@@ -1,5 +1,7 @@
 ﻿using RestApi.Model;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace RestApi.Repository
@@ -9,35 +11,52 @@ namespace RestApi.Repository
         readonly static Dictionary<long, User> _users = new Dictionary<long, User>();
         public void Delete(long id)
         {
-            _users.Remove(id);
+            var ctx = new RestApiContext();
+            ctx.Database.Log = Console.WriteLine;
+            var user = ctx.User.Find(id);
+            ctx.User.Remove(user);
+            ctx.SaveChanges();
+            ctx.Dispose();
         }
 
         public List<User> GetAll()
         {
-            return _users.Select(user => user.Value).ToList();
+            var ctx = new RestApiContext();
+            ctx.Database.Log = Console.WriteLine;
+            var users = ctx.User.ToList();
+            ctx.Dispose();
+            return users;
         }
 
         public User GetOne(long id)
         {
-            return _users.FirstOrDefault(user => user.Key == id).Value;
+            var ctx = new RestApiContext();
+            ctx.Database.Log = Console.WriteLine;
+            var user = ctx.User
+                .Where(usr => usr.Id == id)
+                .FirstOrDefault();
+            ctx.Dispose();
+            return user;
         }
 
         public User Save(User user)
         {
-            List<User> users = GetAll();
-            long id = users.Any() ? users.Max(usr => usr.Id) + 1 : 1;
-            user.Id = id;
-            _users.Add(id, user);
+            var ctx = new RestApiContext();
+            ctx.Database.Log = Console.WriteLine;
+            ctx.User.Add(user);
+            ctx.SaveChanges();
+            ctx.Dispose();
             return user;
         }
 
         public User Update(User user)
         {
-            if(GetOne(user.Id) == null)
-            {
-                return null;
-            }
-            _users[user.Id] = user;
+            var ctx = new RestApiContext();
+            ctx.Database.Log = Console.WriteLine;
+            ctx.User.Attach(user);
+            ctx.Entry(user).State = EntityState.Modified;
+            ctx.SaveChanges();
+            ctx.Dispose();
             return user;
         }
     }

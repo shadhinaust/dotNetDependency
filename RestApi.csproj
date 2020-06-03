@@ -257,6 +257,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006030652240_Initial.cs" />
+    <Compile Include="Migrations\202006030652240_Initial.designer.cs">
+      <DependentUpon>202006030652240_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Role.cs" />
     <Compile Include="Model\User.cs" />
@@ -288,6 +292,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202006030652240_Initial.resx">
+      <DependentUpon>202006030652240_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
