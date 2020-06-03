@@ -1,9 +1,5 @@
-﻿using RestApi.Models;
-using System;
+﻿using RestApi.Model;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RestApi.Repository
 {

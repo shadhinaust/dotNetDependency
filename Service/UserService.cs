@@ -1,4 +1,4 @@
-﻿using RestApi.Models;
+﻿using RestApi.Model;
 using RestApi.Repository;
 using System.Collections.Generic;
 

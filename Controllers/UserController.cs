@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using Autofac.Features.Indexed;
-using RestApi.Models;
+using RestApi.Model;
 using RestApi.Service;
 using System.Net;
 using System.Web.Http;

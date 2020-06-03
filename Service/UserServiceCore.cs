@@ -1,8 +1,6 @@
-﻿using RestApi.Models;
+﻿using RestApi.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace RestApi.Service
 {

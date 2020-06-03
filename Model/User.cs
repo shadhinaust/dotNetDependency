@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
-namespace RestApi.Models
+namespace RestApi.Model
 {
     public class User
     {
@@ -15,5 +11,6 @@ namespace RestApi.Models
         public int ResetCode { get; set; }
         public short LoginAttempt { get; set; }
         public string Status { get; set; }
+        public List<Role> Roles { get; set; }
     }
 }
