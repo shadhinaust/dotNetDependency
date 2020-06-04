@@ -23,7 +23,7 @@ namespace RestApi.Repository
         {
             var ctx = new RestApiContext();
             ctx.Database.Log = Console.WriteLine;
-            var users = ctx.User.ToList();
+            var users = ctx.User.Include(usr=>usr.Roles).ToList();
             ctx.Dispose();
             return users;
         }
@@ -35,6 +35,7 @@ namespace RestApi.Repository
             var user = ctx.User
                 .Where(usr => usr.Id == id)
                 .FirstOrDefault();
+            ctx.Entry(user).Collection(usr => user.Roles).Load();
             ctx.Dispose();
             return user;
         }

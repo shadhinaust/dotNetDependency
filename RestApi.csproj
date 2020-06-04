@@ -268,7 +268,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="Module\RepositoryModule.cs" />
-    <Compile Include="Model\RestApiContext.cs" />
+    <Compile Include="RestApiContext.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Service\IUserService.cs" />
     <Compile Include="Module\ServiceModule.cs" />
@@ -297,6 +297,9 @@
     <EmbeddedResource Include="Migrations\202006030652240_Initial.resx">
       <DependentUpon>202006030652240_Initial.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
