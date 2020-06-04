@@ -5,15 +5,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RestApi.Model
 {
-    [Table("role")]
-    public class Role : Auditor
+    [Table("group")]
+    public class Group : Auditor
     {
         [Key]
         [Column("id", TypeName = "smallint")]
         public short Id { get; set; }
 
         [Column("name", TypeName = "nvarchar")]
-        [Required, MaxLength(16)]
+        [Required, MaxLength(32)]
         public string Name { get; set; }
 
         [Column("description", TypeName = "nvarchar")]
@@ -24,7 +24,8 @@ namespace RestApi.Model
         [Required, MaxLength(8), DefaultValue("Inactive")]
         public string Status { get; set; }
 
-        public virtual ICollection<UserRole> Users { get; set; }
-        public virtual ICollection<GroupRole> Groups { get; set; }
+        public virtual ICollection<UserGroup> Users { get; set; }
+
+        public virtual ICollection<GroupRole> Roles { get; set; }
     }
 }

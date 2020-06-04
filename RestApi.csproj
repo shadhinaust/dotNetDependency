@@ -257,18 +257,25 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202006030652240_Initial.cs" />
-    <Compile Include="Migrations\202006030652240_Initial.designer.cs">
-      <DependentUpon>202006030652240_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202006041242465_V1.0.0_Initial.cs" />
+    <Compile Include="Migrations\202006041242465_V1.0.0_Initial.designer.cs">
+      <DependentUpon>202006041242465_V1.0.0_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\Auditor.cs" />
+    <Compile Include="Model\Group.cs" />
+    <Compile Include="Model\GroupRole.cs" />
+    <Compile Include="Model\LoginHistory.cs" />
     <Compile Include="Model\Role.cs" />
+    <Compile Include="Model\Session.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\UserDto.cs" />
+    <Compile Include="Model\UserGroup.cs" />
+    <Compile Include="Model\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="Module\RepositoryModule.cs" />
-    <Compile Include="RestApiContext.cs" />
+    <Compile Include="Model\RestApiContext.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Service\IUserService.cs" />
     <Compile Include="Module\ServiceModule.cs" />
@@ -294,12 +301,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202006030652240_Initial.resx">
-      <DependentUpon>202006030652240_Initial.cs</DependentUpon>
-    </EmbeddedResource>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <EmbeddedResource Include="Migrations\202006041242465_V1.0.0_Initial.resx">
+      <DependentUpon>202006041242465_V1.0.0_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
