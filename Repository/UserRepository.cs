@@ -23,7 +23,7 @@ namespace RestApi.Repository
         {
             var ctx = new RestApiContext();
             ctx.Database.Log = Console.WriteLine;
-            var users = ctx.User.Include(usr=>usr.Roles).ToList();
+            var users = ctx.User.Include(usr => usr.Roles).ToList();
             ctx.Dispose();
             return users;
         }
@@ -43,6 +43,7 @@ namespace RestApi.Repository
         public User Save(User user)
         {
             var ctx = new RestApiContext();
+
             ctx.Database.Log = Console.WriteLine;
             ctx.User.Add(user);
             ctx.SaveChanges();

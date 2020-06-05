@@ -23,8 +23,5 @@ namespace RestApi.Model
         [Column("user_id", TypeName = "bigint")]
         public long UserId { get; set; }
         public virtual User User { get; set; }
-
-
-        public virtual LoginHistory LoginHistory { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace RestApi.Model
 {
     [Table("group")]
-    public class Group : Auditor
+    public class Group
     {
         [Key]
         [Column("id", TypeName = "smallint")]
@@ -24,8 +24,8 @@ namespace RestApi.Model
         [Required, MaxLength(8), DefaultValue("Inactive")]
         public string Status { get; set; }
 
-        public virtual ICollection<UserGroup> Users { get; set; }
+        public virtual ICollection<User> Users { get; set; }
 
-        public virtual ICollection<GroupRole> Roles { get; set; }
+        public virtual ICollection<Role> Roles { get; set; }
     }
 }

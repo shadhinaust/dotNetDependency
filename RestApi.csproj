@@ -257,9 +257,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202006041242465_V1.0.0_Initial.cs" />
-    <Compile Include="Migrations\202006041242465_V1.0.0_Initial.designer.cs">
-      <DependentUpon>202006041242465_V1.0.0_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202006051107282_V1.0.0_Init.cs" />
+    <Compile Include="Migrations\202006051107282_V1.0.0_Init.designer.cs">
+      <DependentUpon>202006051107282_V1.0.0_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006051127247_V1.0.1_Seed_Data.cs" />
+    <Compile Include="Migrations\202006051127247_V1.0.1_Seed_Data.designer.cs">
+      <DependentUpon>202006051127247_V1.0.1_Seed_Data.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006051133238_V1.0.2_Seed_Data.cs" />
+    <Compile Include="Migrations\202006051133238_V1.0.2_Seed_Data.designer.cs">
+      <DependentUpon>202006051133238_V1.0.2_Seed_Data.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006051137039_V1.0.2_Updated_Table.cs" />
+    <Compile Include="Migrations\202006051137039_V1.0.2_Updated_Table.designer.cs">
+      <DependentUpon>202006051137039_V1.0.2_Updated_Table.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Auditor.cs" />
@@ -268,6 +280,7 @@
     <Compile Include="Model\LoginHistory.cs" />
     <Compile Include="Model\Role.cs" />
     <Compile Include="Model\Session.cs" />
+    <Compile Include="Model\Status.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\UserDto.cs" />
     <Compile Include="Model\UserGroup.cs" />
@@ -304,8 +317,17 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202006041242465_V1.0.0_Initial.resx">
-      <DependentUpon>202006041242465_V1.0.0_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202006051107282_V1.0.0_Init.resx">
+      <DependentUpon>202006051107282_V1.0.0_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006051127247_V1.0.1_Seed_Data.resx">
+      <DependentUpon>202006051127247_V1.0.1_Seed_Data.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006051133238_V1.0.2_Seed_Data.resx">
+      <DependentUpon>202006051133238_V1.0.2_Seed_Data.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006051137039_V1.0.2_Updated_Table.resx">
+      <DependentUpon>202006051137039_V1.0.2_Updated_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

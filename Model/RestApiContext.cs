@@ -12,14 +12,14 @@ namespace RestApi.Model
 
         public RestApiContext() : base("sqlserver")
         {
-
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-/*            modelBuilder.Entity<Student>()
-                    .Property(s => s.CreatedDate)
-                    .HasDefaultValueSql("GETDATE()");*/
+            modelBuilder
+                .Entity<User>()
+                .Property(t => t.Name)
+                .HasMaxLength(50);
         }
     }
 }
