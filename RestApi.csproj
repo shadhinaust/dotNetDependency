@@ -254,6 +254,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Dto\GroupDto.cs" />
+    <Compile Include="Dto\RoleDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -273,22 +275,49 @@
     <Compile Include="Migrations\202006051137039_V1.0.2_Updated_Table.designer.cs">
       <DependentUpon>202006051137039_V1.0.2_Updated_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006080905398_V1.0.5_Fluent_Api.cs" />
+    <Compile Include="Migrations\202006080905398_V1.0.5_Fluent_Api.designer.cs">
+      <DependentUpon>202006080905398_V1.0.5_Fluent_Api.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006081036490_V1.0.3_Fluent_Api.cs" />
+    <Compile Include="Migrations\202006081036490_V1.0.3_Fluent_Api.designer.cs">
+      <DependentUpon>202006081036490_V1.0.3_Fluent_Api.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006081330498_V1.0.6_Fluent_Api.cs" />
+    <Compile Include="Migrations\202006081330498_V1.0.6_Fluent_Api.designer.cs">
+      <DependentUpon>202006081330498_V1.0.6_Fluent_Api.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Auditor.cs" />
     <Compile Include="Model\Group.cs" />
     <Compile Include="Model\GroupRole.cs" />
     <Compile Include="Model\LoginHistory.cs" />
+    <Compile Include="Model\Map\AuditorMap.cs" />
+    <Compile Include="Model\Map\GroupMap.cs" />
+    <Compile Include="Model\Map\GroupRoleMap.cs" />
+    <Compile Include="Model\Map\LoginHistoryMap.cs" />
+    <Compile Include="Model\Map\RoleMap.cs" />
+    <Compile Include="Model\Map\SessionMap.cs" />
+    <Compile Include="Model\Map\UserGroupMap.cs" />
+    <Compile Include="Model\Map\UserMap.cs" />
     <Compile Include="Model\Role.cs" />
     <Compile Include="Model\Session.cs" />
     <Compile Include="Model\Status.cs" />
     <Compile Include="Model\User.cs" />
-    <Compile Include="Model\UserDto.cs" />
+    <Compile Include="Dto\UserDto.cs" />
     <Compile Include="Model\UserGroup.cs" />
-    <Compile Include="Model\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\GroupRepository.cs" />
+    <Compile Include="Repository\GroupRole.cs" />
+    <Compile Include="Repository\IGroupRepository.cs" />
+    <Compile Include="Repository\IGroupRole.cs" />
+    <Compile Include="Repository\IRoleRepository.cs" />
+    <Compile Include="Repository\IUserGroup.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="Module\RepositoryModule.cs" />
-    <Compile Include="Model\RestApiContext.cs" />
+    <Compile Include="Context\RestApiContext.cs" />
+    <Compile Include="Repository\RoleRepository.cs" />
+    <Compile Include="Repository\UserGroup.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Service\IUserService.cs" />
     <Compile Include="Module\ServiceModule.cs" />
@@ -328,6 +357,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006051137039_V1.0.2_Updated_Table.resx">
       <DependentUpon>202006051137039_V1.0.2_Updated_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006080905398_V1.0.5_Fluent_Api.resx">
+      <DependentUpon>202006080905398_V1.0.5_Fluent_Api.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006081036490_V1.0.3_Fluent_Api.resx">
+      <DependentUpon>202006081036490_V1.0.3_Fluent_Api.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006081330498_V1.0.6_Fluent_Api.resx">
+      <DependentUpon>202006081330498_V1.0.6_Fluent_Api.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,23 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
 
 namespace RestApi.Model
 {
-    [Table("group_role")]
-    public class GroupRole
+    public class GroupRole: Auditor
     {
-        [Key]
-        [Column("id", TypeName = "bigint")]
         public long Id { get; set; }
 
-        [ForeignKey("Group")]
-        [Column("group_id", TypeName = "smallint")]
         public short GroupId { get; set; }
-        public virtual Group Group { get; set; }
+        public Group Group { get; set; }
 
-        [ForeignKey("Role")]
-        [Column("role_id", TypeName = "smallint")]
         public short RoleId { get; set; }
-        public virtual Role Role { get; set; }
+        public Role Role { get; set; }
+
+        public GroupRole()
+        {
+            this.CreatedBy = this.ModifiedBy = "Dev";
+            this.CreatedAt = this.ModifiedAt = DateTime.Now;
+        }
     }
 }

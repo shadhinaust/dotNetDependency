@@ -1,47 +1,41 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
 
 namespace RestApi.Model
 {
-    [Table("user")]
-    public class User
+    public class User: Auditor
     {
-        [Key]
-        [Column("id", TypeName = "bigint")]
         public long Id { get; set; }
 
-        [Column("name", TypeName = "nvarchar")]
-        [Required, MaxLength(32)]
-        [Index("idx_name", IsClustered = false, IsUnique = false)]
         public string Name { get; set; }
 
-        [Column("email", TypeName = "nvarchar")]
-        [Required, MaxLength(256)]
-        [Index("idx_email", IsClustered = false, IsUnique = true)]
         public string Email { get; set; }
 
-        [Column("password", TypeName = "nvarchar")]
-        [Required, MaxLength(256)]
         public string Password { get; set; }
 
-        [Column("reset_code", TypeName = "int")]
         public int ResetCode { get; set; }
 
-        [Column("login_attempt", TypeName = "smallint")]
-        public short LoginAttempt { get; set; }
+        public long LoginAttempt { get; set; }
 
-        [Column("status", TypeName = "nvarchar")]
-        [Required, MaxLength(8), DefaultValue("Inactive")]
         public string Status { get; set; }
 
-        public virtual ICollection<Group> Groups { get; set; }
+        public ICollection<UserGroup> UserGroups { get; set; }
 
-        public virtual ICollection<Role> Roles { get; set; }
+        public ICollection<Session> Sessions { get; set; }
 
-        public virtual ICollection<Session> Sessions { get; set; }
+        public ICollection<LoginHistory> LoginHistories { get; set; }
 
-        public virtual ICollection<LoginHistory> LoginHistories { get; set; }
+        public ICollection<Group> Groups { get; set; }
+
+        public ICollection<Role> Roles { get; set; }
+
+        public User()
+        {
+            this.UserGroups = new List<UserGroup>();
+            this.Sessions = new List<Session>();
+            this.LoginHistories = new List<LoginHistory>();
+            this.CreatedBy = this.ModifiedBy = "Dev";
+            this.CreatedAt = this.ModifiedAt = DateTime.Now;
+        }
     }
 }

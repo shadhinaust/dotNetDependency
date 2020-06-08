@@ -1,6 +1,10 @@
-﻿using RestApi.Model;
+﻿
+using Microsoft.Ajax.Utilities;
+using RestApi.Context;
+using RestApi.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
 
@@ -21,11 +25,13 @@ namespace RestApi.Repository
 
         public List<User> GetAll()
         {
-            var ctx = new RestApiContext();
-            ctx.Database.Log = Console.WriteLine;
-            var users = ctx.User.Include(usr => usr.Roles).ToList();
-            ctx.Dispose();
-            return users;
+            using (var ctx = new RestApiContext())
+            {
+                /*var userGroup = ctx.User
+                    .Join(ctx.UserGroup);*/
+              
+                return ctx.User.ToList();
+            }
         }
 
         public User GetOne(long id)
@@ -35,7 +41,7 @@ namespace RestApi.Repository
             var user = ctx.User
                 .Where(usr => usr.Id == id)
                 .FirstOrDefault();
-            ctx.Entry(user).Collection(usr => user.Roles).Load();
+            ctx.Entry(user).Collection(usr => usr.UserGroups).Load();
             ctx.Dispose();
             return user;
         }

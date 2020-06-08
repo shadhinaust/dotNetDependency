@@ -1,30 +1,25 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
 
 namespace RestApi.Model
 {
-    [Table("role")]
-    public class Role
+    public class Role: Auditor
     {
-        [Key]
-        [Column("id", TypeName = "smallint")]
         public short Id { get; set; }
 
-        [Column("name", TypeName = "nvarchar")]
-        [Required, MaxLength(16)]
         public string Name { get; set; }
 
-        [Column("description", TypeName = "nvarchar")]
-        [MaxLength(128)]
         public string Description { get; set; }
 
-        [Column("status", TypeName = "nvarchar")]
-        [Required, MaxLength(8), DefaultValue("Inactive")]
         public string Status { get; set; }
 
-        public virtual ICollection<User> Users { get; set; }
-        public virtual ICollection<Group> Groups { get; set; }
+        public virtual ICollection<GroupRole> GroupRoles { get; set; }
+
+        public Role()
+        {
+            this.GroupRoles = new List<GroupRole>();
+            this.CreatedBy = this.ModifiedBy = "Dev";
+            this.CreatedAt = this.ModifiedAt = DateTime.Now;
+        }
     }
 }
