@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class V106_Fluent_Api : DbMigration
+    public partial class V100__Auditor : DbMigration
     {
         public override void Up()
         {

@@ -7,9 +7,12 @@ namespace RestApi.Model.Map
         public UserMap()
         {
             this.ToTable("user")
-                .HasKey(user => user.Id)
                 .Ignore(user => user.Groups)
-                .Ignore(user => user.Roles);
+                .Ignore(user => user.Roles)
+                .HasKey(user => user.Id)
+                .HasIndex(user => new { user.Name, user.Email })
+                .IsUnique()
+                .HasName("idx_name_email");
 
             this.Property(user => user.Id)
                 .HasColumnName("id")
@@ -46,6 +49,11 @@ namespace RestApi.Model.Map
                 .HasColumnType("nvarchar")
                 .HasMaxLength(8)
                 .IsRequired();
+
+/*            this.HasMany(user => user.Sessions)
+                .WithRequired(session => session.User)
+                .HasForeignKey(session => session.UserId)
+                .WillCascadeOnDelete();*/
         }
     }
 }

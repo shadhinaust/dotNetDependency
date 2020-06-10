@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace RestApi.Model
 {
-    public class Group: Auditor
+    public class Group
     {
         public short Id { get; set; }
 
@@ -15,14 +15,15 @@ namespace RestApi.Model
 
         public ICollection<UserGroup> UserGroups { get; set; }
 
-        public virtual ICollection<GroupRole> GroupRoles { get; set; }
+        public ICollection<GroupRole> GroupRoles { get; set; }
+
+        public Auditor Auditor { get; set; }
 
         public Group()
         {
             this.UserGroups = new List<UserGroup>();
             this.GroupRoles = new List<GroupRole>();
-            this.CreatedBy = this.ModifiedBy = "Dev";
-            this.CreatedAt = this.ModifiedAt = DateTime.Now;
+            this.Auditor = new Auditor() { CreatedBy = "development", CreatedAt = DateTime.Now, ModifiedBy = "development", ModifiedAt = DateTime.Now };
         }
     }
 }

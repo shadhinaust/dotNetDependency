@@ -1,10 +1,11 @@
-﻿using Autofac;
-using Autofac.Features.Indexed;
+﻿using Autofac.Features.Indexed;
 using Microsoft.Ajax.Utilities;
 using RestApi.Dto;
 using RestApi.Model;
 using RestApi.Service;
+using RestApi.ServiceFacade;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web.Http;
 
@@ -14,14 +15,12 @@ namespace RestApi.Controllers
     public class UserController : ApiController
     {
         private readonly IUserService _userService;
-        private readonly IUserService _userServiceCore;
-        private readonly ILifetimeScope _scope;
+        private readonly IUserServiceFacade _userServiceFacade;
 
-        public UserController(ILifetimeScope scope, IIndex<UserServiceType, IUserService> userService)
+        public UserController(IUserServiceFacade userServiceFacade, IIndex<UserServiceType, IUserService> userService)
         {
-            _scope = scope;
-            _userService = userService[UserServiceType.UserService];
-            _userServiceCore = userService[UserServiceType.UserServiceCore];
+            this._userService = userService[UserServiceType.UserService];
+            this._userServiceFacade = userServiceFacade;
         }
 
         [HttpGet]
@@ -30,25 +29,6 @@ namespace RestApi.Controllers
         {
             return Content(HttpStatusCode.OK, "What is the difference between Rest and Soap");
         }
-
-        private void ThreadOne()
-        {
-            using (var scope = this._scope.BeginLifetimeScope())
-            {
-                var userService = scope.ResolveKeyed<IUserService>(UserServiceType.UserServiceCore);
-                userService.GetAllUsers();
-            }
-        }
-
-        private IHttpActionResult ThreadTwo()
-        {
-            var scope = this._scope.BeginLifetimeScope();
-            var userService = scope.Resolve<IUserService>();
-            var content = userService.GetAllUsers();
-            scope.Dispose();
-            return Content(HttpStatusCode.OK, content);
-        }
-
 
         [HttpGet]
         [Route("api/users")]
@@ -110,6 +90,16 @@ namespace RestApi.Controllers
         {
             _userService.DeleteUser(id);
             return Content(HttpStatusCode.OK, "Goodby user!");
+        }
+
+        [HttpGet]
+        [Route("api/user/group/{groupId}/users")]
+        public IHttpActionResult GetUsers(short groupId)
+        {
+            List<UserDto> users = _userServiceFacade.GetAllUsersByGroupId(groupId)
+                .Select(user => new UserDto() { Name = user.Name, Email = user.Email, Status = user.Status })
+                .ToList();
+            return Content(HttpStatusCode.OK, users);
         }
     }
 }

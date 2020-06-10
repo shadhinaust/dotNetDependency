@@ -2,20 +2,22 @@
 
 namespace RestApi.Model
 {
-    public class GroupRole: Auditor
+    public class GroupRole
     {
         public long Id { get; set; }
 
         public short GroupId { get; set; }
+
         public Group Group { get; set; }
 
         public short RoleId { get; set; }
         public Role Role { get; set; }
 
+        public Auditor Auditor { get; set; }
+
         public GroupRole()
         {
-            this.CreatedBy = this.ModifiedBy = "Dev";
-            this.CreatedAt = this.ModifiedAt = DateTime.Now;
+            this.Auditor = new Auditor() { CreatedBy = "development", CreatedAt = DateTime.Now, ModifiedBy = "development", ModifiedAt = DateTime.Now };
         }
     }
 }

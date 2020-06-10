@@ -23,6 +23,11 @@ namespace RestApi.Service
             return _userRepository.GetAll();
         }
 
+        public List<User> GetAllUsers(Group group)
+        {
+            return _userRepository.GetAll(group);
+        }
+
         public User GetUser(long id)
         {
             return _userRepository.GetOne(id);

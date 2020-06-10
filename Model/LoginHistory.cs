@@ -2,7 +2,7 @@
 
 namespace RestApi.Model
 {
-    public class LoginHistory : Auditor
+    public class LoginHistory
     {
         public long Id { get; set; }
 
@@ -13,12 +13,13 @@ namespace RestApi.Model
         public long SessionId { get; set; }
 
         public long UserId { get; set; }
-        public virtual User User { get; set; }
+        public User User { get; set; }
+
+        public Auditor Auditor { get; set; }
 
         public LoginHistory()
         {
-            this.CreatedBy = this.ModifiedBy = "Dev";
-            this.CreatedAt = this.ModifiedAt = DateTime.Now;
+            this.Auditor = new Auditor() { CreatedBy = "development", CreatedAt = DateTime.Now, ModifiedBy = "development", ModifiedAt = DateTime.Now };
         }
     }
 }

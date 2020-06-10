@@ -4,7 +4,6 @@ using RestApi.Context;
 using RestApi.Model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
 
@@ -15,7 +14,7 @@ namespace RestApi.Repository
         readonly static Dictionary<long, User> _users = new Dictionary<long, User>();
         public void Delete(long id)
         {
-            var ctx = new RestApiContext();
+            var ctx = new EntityContext();
             ctx.Database.Log = Console.WriteLine;
             var user = ctx.User.Find(id);
             ctx.User.Remove(user);
@@ -25,18 +24,155 @@ namespace RestApi.Repository
 
         public List<User> GetAll()
         {
-            using (var ctx = new RestApiContext())
+            using (var ctx = new EntityContext())
             {
-                /*var userGroup = ctx.User
-                    .Join(ctx.UserGroup);*/
-              
-                return ctx.User.ToList();
+                var users = ctx.User;
+                var userGroups = ctx.UserGroup;
+                var groups = ctx.Group;
+                var groupRoles = ctx.GroupRole;
+                var roles = ctx.Role;
+
+/*                var joinQuery = from u in users
+                               join ug in userGroups on u.Id equals ug.UserId
+                               join g in groups on ug.GroupId equals g.Id
+                               join gr in groupRoles on g.Id equals gr.GroupId
+                               join r in roles on gr.RoleId equals r.Id
+                               select new UserDto() { Name = u.Name, Email = u.Email, Status = u.Status };
+
+                var joinQueryData = joinQuery.ToList();*/
+
+
+/*                var fluentSyntex = users
+                    .Join(userGroups,
+                        u => u.Id,
+                        ug => ug.UserId,
+                        (u, ug) => new { u, u.Name, u.Email, ug.GroupId })
+                    .Join(groups,
+                        ug => ug.GroupId,
+                        g => g.Id,
+                        (ug, g) => new { g, g.Id, g.Name })
+                    .Join(groupRoles,
+                        g => g.Id,
+                        gr => gr.GroupId,
+                        (g, gr) => new { gr.RoleId })
+                    .Join(roles,
+                        gr => gr.RoleId,
+                        r => r.Id,
+                        (gr, r) => new { r, r.Name });
+
+                var fluentSyntexData = fluentSyntex.ToList();*/
+
+/*                var firstQuery = users.Include(user => user.UserGroups).ToList();
+                var firstUsers = new List<User>();
+                firstQuery.ForEach(user =>
+                {
+                    var allGroups = new HashSet<Group>();
+                    user.UserGroups.ForEach(userGroup =>
+                    {
+                        allGroups.Add(groups
+                            .Where(group => group.Id == userGroup.GroupId)
+                            .Include(group => group.GroupRoles)
+                            .SingleOrDefault());
+                    });
+                    user.Groups = allGroups;
+
+                    var allRoles = new HashSet<Role>();
+                    allGroups.ForEach(group =>
+                    {
+                        group.GroupRoles.ForEach(groupRole =>
+                        {
+                            allRoles.Add(roles
+                                .Where(role => role.Id == groupRole.RoleId)
+                                .SingleOrDefault());
+                        });
+                    });
+                    user.Roles = allRoles;
+
+                    firstUsers.Add(user);
+                });*/
+
+                var secondQuery = users
+                    .Include(user => user.UserGroups)
+                    .Include(user => user.Sessions)
+                    .OrderBy(user => user.Id)
+                    .Skip(0)
+                    .Take(5)
+                    .ToList();
+
+                var secondUsers = new List<User>();
+                secondQuery.ForEach(user =>
+                {
+                    var allGroups = new HashSet<Group>();
+                    user.UserGroups
+                        .Select(userGroup => userGroup.GroupId)
+                        .ToHashSet()
+                        .ForEach(groupId => 
+                        {
+                            allGroups.Add(groups
+                                .Include(group => group.GroupRoles)
+                                .Where(group => group.Id == groupId)
+                                .FirstOrDefault());
+                        });
+                    user.Groups = allGroups;
+
+                    var allRoles = new HashSet<Role>();
+                    allGroups.ForEach(group =>
+                    {
+                        group.GroupRoles
+                        .Select(groupRole => groupRole.RoleId)
+                        .ToHashSet()
+                        .ForEach(roleId => 
+                        {
+                            allRoles.Add(roles.Find(roleId));
+                        });
+                    });
+                    user.Roles = allRoles;
+
+                    secondUsers.Add(user);
+                });
+
+                return secondUsers;
+            }
+        }
+
+        public List<User> GetAll(Group group)
+        {
+            using(var ctx = new EntityContext())
+            {
+                ctx.Database.Log = Console.Write;
+
+                var users = ctx.User;
+                var userGroups = ctx.UserGroup;
+                var groups = ctx.Group;
+
+                // 1st
+                var uGrps = groups
+                    .Include(grp => grp.UserGroups)
+                    .Where(grp => grp.Id == group.Id)
+                    .FirstOrDefault()
+                    .UserGroups
+                    .Select(ug => ug.UserId)
+                    .ToList();
+
+                var allUsers = users.Where(user => uGrps
+                    .Contains(user.Id))
+                    .ToList();
+
+                // 2nd 
+                var allUsers_2 = users.Where(user => userGroups
+                    .Where(userGroup => userGroup.GroupId == group.Id)
+                    .Select(userGroup => userGroup.UserId)
+                    .ToList()
+                    .Contains(user.Id))
+                    .ToList();
+
+                return allUsers_2;
             }
         }
 
         public User GetOne(long id)
         {
-            var ctx = new RestApiContext();
+            var ctx = new EntityContext();
             ctx.Database.Log = Console.WriteLine;
             var user = ctx.User
                 .Where(usr => usr.Id == id)
@@ -48,7 +184,7 @@ namespace RestApi.Repository
 
         public User Save(User user)
         {
-            var ctx = new RestApiContext();
+            var ctx = new EntityContext();
 
             ctx.Database.Log = Console.WriteLine;
             ctx.User.Add(user);
@@ -59,7 +195,7 @@ namespace RestApi.Repository
 
         public User Update(User user)
         {
-            var ctx = new RestApiContext();
+            var ctx = new EntityContext();
             ctx.Database.Log = Console.WriteLine;
             ctx.User.Attach(user);
             ctx.Entry(user).State = EntityState.Modified;

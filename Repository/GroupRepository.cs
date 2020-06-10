@@ -1,4 +1,5 @@
-﻿using RestApi.Model;
+﻿using RestApi.Context;
+using RestApi.Model;
 using System;
 using System.Collections.Generic;
 
@@ -6,7 +7,7 @@ namespace RestApi.Repository
 {
     public class GroupRepository : IGroupRepository
     {
-        public void Delete(long id)
+        public void Delete(short id)
         {
             throw new NotImplementedException();
         }
@@ -16,9 +17,12 @@ namespace RestApi.Repository
             throw new NotImplementedException();
         }
 
-        public Group GetOne(long id)
+        public Group GetOne(short id)
         {
-            throw new NotImplementedException();
+            using(var ctx = new EntityContext())
+            {
+                return ctx.Group.Find(id);
+            }
         }
 
         public Group Save(Group group)

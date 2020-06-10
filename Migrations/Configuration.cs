@@ -1,18 +1,17 @@
 ﻿namespace RestApi.Migrations
 {
-    using RestApi.Context;
     using RestApi.Model;
     using System.Collections.Generic;
     using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<RestApiContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<RestApi.Context.EntityContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(RestApiContext ctx)
+        protected override void Seed(RestApi.Context.EntityContext ctx)
         {
             // Roles
             Role Role_1 = new Role() { Id = 1, Name = "Master Admin", Description = "Master admin can perform all the task", Status = Status.Active.ToString() };
@@ -36,7 +35,7 @@
             User User_9 = new User() { Id = 9, Name = "Ahmed", Email = "ahmed@asiatel.com.sg", Password = "password", ResetCode = 12345, LoginAttempt = 0, Status = Status.Active.ToString() };
 
             // UserGroups
-            UserGroup UserGroup_1 = new UserGroup() { Id=1, UserId = 1, GroupId = 1 };
+            UserGroup UserGroup_1 = new UserGroup() { Id = 1, UserId = 1, GroupId = 1 };
             UserGroup UserGroup_2 = new UserGroup() { Id = 2, UserId = 1, GroupId = 2 };
             UserGroup UserGroup_3 = new UserGroup() { Id = 3, UserId = 1, GroupId = 3 };
 

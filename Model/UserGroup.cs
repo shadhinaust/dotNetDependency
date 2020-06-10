@@ -2,7 +2,7 @@
 
 namespace RestApi.Model
 {
-    public class UserGroup: Auditor
+    public class UserGroup
     {
         public long Id { get; set; }
 
@@ -12,10 +12,11 @@ namespace RestApi.Model
         public short GroupId { get; set; }
         public Group Group { get; set; }
 
+        public Auditor Auditor { get; set; }
+
         public UserGroup()
         {
-            this.CreatedBy = this.ModifiedBy = "Dev";
-            this.CreatedAt = this.ModifiedAt = DateTime.Now;
+            this.Auditor = new Auditor() { CreatedBy = "development", CreatedAt = DateTime.Now, ModifiedBy = "development", ModifiedAt = DateTime.Now };
         }
     }
 }

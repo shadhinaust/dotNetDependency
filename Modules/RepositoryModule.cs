@@ -1,6 +1,7 @@
 ﻿using Autofac;
+using RestApi.Repository;
 
-namespace RestApi.Repository
+namespace RestApi.Modules
 {
     public class RepositoryModule : Module
     {
@@ -9,6 +10,11 @@ namespace RestApi.Repository
             builder
                 .RegisterType<UserRepository>()
                 .As<IUserRepository>()
+                .SingleInstance();
+
+            builder
+                .RegisterType<GroupRepository>()
+                .As<IGroupRepository>()
                 .SingleInstance();
         }
     }

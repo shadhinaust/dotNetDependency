@@ -7,13 +7,13 @@ namespace RestApi.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class V105_Fluent_Api : IMigrationMetadata
+    public sealed partial class V100__Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(V105_Fluent_Api));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(V100__Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "202006080905398_V1.0.5_Fluent_Api"; }
+            get { return "202006100438463_V1.0.0__Initial"; }
         }
         
         string IMigrationMetadata.Source

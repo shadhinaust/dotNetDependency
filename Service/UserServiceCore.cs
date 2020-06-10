@@ -16,6 +16,11 @@ namespace RestApi.Service
             throw new NotImplementedException();
         }
 
+        public List<User> GetAllUsers(Group group)
+        {
+            throw new NotImplementedException();
+        }
+
         public User GetUser(long id)
         {
             throw new NotImplementedException();

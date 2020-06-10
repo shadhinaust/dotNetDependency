@@ -1,7 +1,8 @@
 ﻿using Autofac;
-using Autofac.Core;
+using RestApi.Service;
+using RestApi.ServiceFacade;
 
-namespace RestApi.Service
+namespace RestApi.Modules
 {
     public class ServiceModule : Module
     {
@@ -14,6 +15,11 @@ namespace RestApi.Service
             builder
                 .RegisterType<UserServiceCore>()
                 .Keyed<IUserService>(UserServiceType.UserServiceCore)
+                .SingleInstance();
+
+            builder
+                .RegisterType<GroupService>()
+                .As<IGroupService>()
                 .SingleInstance();
         }
     }

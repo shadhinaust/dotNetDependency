@@ -2,8 +2,7 @@
 using Autofac.Extras.CommonServiceLocator;
 using Autofac.Integration.WebApi;
 using CommonServiceLocator;
-using RestApi.Repository;
-using RestApi.Service;
+using RestApi.Modules;
 using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.Tracing;
@@ -40,10 +39,9 @@ namespace RestApi
                 .As<IUserRepository>()
                 .SingleInstance();*/
 
-            builder
-                .RegisterModule<RepositoryModule>();
-            builder
-                .RegisterModule<ServiceModule>(); 
+            builder.RegisterModule<RepositoryModule>();
+            builder.RegisterModule<ServiceModule>(); 
+            builder.RegisterModule<ServiceFacadeModule>(); 
 
 
             var container = builder.Build();
