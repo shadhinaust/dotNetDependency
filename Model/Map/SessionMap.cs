@@ -26,13 +26,7 @@ namespace RestApi.Model.Map
 
             this.Property(session => session.UserId)
                 .HasColumnName("user_id")
-                .HasColumnType("bigint")
-                .IsRequired();
-
-            this.HasRequired<User>(user => user.User)
-                .WithMany(session => session.Sessions)
-                .HasForeignKey(session => session.UserId)
-                .WillCascadeOnDelete();
+                .HasColumnType("bigint");
         }
     }
 }

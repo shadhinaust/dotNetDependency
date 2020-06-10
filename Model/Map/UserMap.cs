@@ -7,8 +7,6 @@ namespace RestApi.Model.Map
         public UserMap()
         {
             this.ToTable("user")
-                .Ignore(user => user.Groups)
-                .Ignore(user => user.Roles)
                 .HasKey(user => user.Id)
                 .HasIndex(user => new { user.Name, user.Email })
                 .IsUnique()
@@ -38,11 +36,13 @@ namespace RestApi.Model.Map
 
             this.Property(user => user.ResetCode)
                 .HasColumnName("reset_code")
-                .HasColumnType("int");
+                .HasColumnType("int")
+                .IsOptional();
 
             this.Property(user => user.LoginAttempt)
                 .HasColumnName("login_attempt")
-                .HasColumnType("bigint");
+                .HasColumnType("bigint")
+                .IsOptional();
 
             this.Property(user => user.Status)
                 .HasColumnName("status")
@@ -50,10 +50,20 @@ namespace RestApi.Model.Map
                 .HasMaxLength(8)
                 .IsRequired();
 
-/*            this.HasMany(user => user.Sessions)
+            this.HasMany<UserGroup>(user => user.UserGroups)
+                .WithRequired(userGroup => userGroup.User)
+                .HasForeignKey(userGroup => userGroup.UserId)
+                .WillCascadeOnDelete();
+
+            this.HasMany<Session>(user => user.Sessions)
                 .WithRequired(session => session.User)
                 .HasForeignKey(session => session.UserId)
-                .WillCascadeOnDelete();*/
+                .WillCascadeOnDelete();
+
+            this.HasMany<LoginHistory>(user => user.LoginHistories)
+                .WithRequired(loginHistory => loginHistory.User)
+                .HasForeignKey(loginHistory => loginHistory.UserId)
+                .WillCascadeOnDelete();
         }
     }
 }

@@ -9,14 +9,21 @@ using System.Web;
 
 namespace RestApi.Context
 {
+    // [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class EntityContext : DbContext
     {
         public DbSet<Role> Role { get; set; }
+
         public DbSet<Group> Group { get; set; }
+
         public DbSet<User> User { get; set; }
+
         public DbSet<LoginHistory> LoginHistory { get; set; }
+
         public DbSet<Session> Session { get; set; }
+
         public DbSet<UserGroup> UserGroup { get; set; }
+
         public DbSet<GroupRole> GroupRole { get; set; }
 
         public EntityContext() : base("sqlserver")
@@ -78,6 +85,7 @@ namespace RestApi.Context
                 ? HttpContext.Current.User.Identity.Name
                 : "Anonymous";
             var now = DateTime.Now;
+
             entities.ForEach(entity =>
             {
                 if (entity.State == EntityState.Added)

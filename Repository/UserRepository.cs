@@ -91,7 +91,7 @@ namespace RestApi.Repository
                     firstUsers.Add(user);
                 });*/
 
-                var secondQuery = users
+                /*var secondQuery = users
                     .Include(user => user.UserGroups)
                     .Include(user => user.Sessions)
                     .OrderBy(user => user.Id)
@@ -129,9 +129,9 @@ namespace RestApi.Repository
                     user.Roles = allRoles;
 
                     secondUsers.Add(user);
-                });
+                });*/
 
-                return secondUsers;
+                return ctx.User.ToList();
             }
         }
 
@@ -184,13 +184,17 @@ namespace RestApi.Repository
 
         public User Save(User user)
         {
-            var ctx = new EntityContext();
-
-            ctx.Database.Log = Console.WriteLine;
-            ctx.User.Add(user);
-            ctx.SaveChanges();
-            ctx.Dispose();
-            return user;
+            using (var ctx = new EntityContext())
+            {
+                ctx.Database.Log = Console.WriteLine;
+                user.UserGroups.ForEach(userGroup =>
+                {
+                    ctx.UserGroup.Add(userGroup);
+                });
+                ctx.User.Add(user);
+                ctx.SaveChanges();
+                return user;
+            }
         }
 
         public User Update(User user)

@@ -125,6 +125,12 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=3.1.4.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Extensions.Primitives.3.1.4\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="MySql.Data, Version=6.10.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>packages\MySql.Data.6.10.9\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.10.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>packages\MySql.Data.Entity.6.10.9\lib\net452\MySql.Data.Entity.EF6.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -132,16 +138,20 @@
     <Reference Include="System.Collections.Immutable, Version=1.2.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Collections.Immutable.1.7.1\lib\net461\System.Collections.Immutable.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel" />
     <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.ComponentModel.Annotations.4.7.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Diagnostics.DiagnosticSource.4.7.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -259,13 +269,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202006100438463_V1.0.0__Initial.cs" />
-    <Compile Include="Migrations\202006100438463_V1.0.0__Initial.designer.cs">
-      <DependentUpon>202006100438463_V1.0.0__Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202006101309013_V1.0.0__Initial.cs" />
+    <Compile Include="Migrations\202006101309013_V1.0.0__Initial.designer.cs">
+      <DependentUpon>202006101309013_V1.0.0__Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202006100442206_V1.0.1__Auditor.cs" />
-    <Compile Include="Migrations\202006100442206_V1.0.1__Auditor.designer.cs">
-      <DependentUpon>202006100442206_V1.0.1__Auditor.cs</DependentUpon>
+    <Compile Include="Migrations\202006101311182_V1.0.0__Updated_User.cs" />
+    <Compile Include="Migrations\202006101311182_V1.0.0__Updated_User.designer.cs">
+      <DependentUpon>202006101311182_V1.0.0__Updated_User.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Auditor.cs" />
@@ -290,19 +300,24 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\GroupRepository.cs" />
     <Compile Include="Repository\IGroupRepository.cs" />
+    <Compile Include="Repository\IUserGroupRepository.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="Modules\RepositoryModule.cs" />
     <Compile Include="Context\EntityContext.cs" />
+    <Compile Include="Repository\UserGroupRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
-    <Compile Include="ServiceFacade\IUserServiceFacade.cs" />
-    <Compile Include="ServiceFacade\UserServiceFacade.cs" />
+    <Compile Include="Service\Facade\IUserServiceFacade.cs" />
+    <Compile Include="Service\Facade\UserServiceFacade.cs" />
     <Compile Include="Service\GroupService.cs" />
     <Compile Include="Service\IGroupService.cs" />
+    <Compile Include="Service\IUserGroupService.cs" />
     <Compile Include="Service\IUserService.cs" />
     <Compile Include="Modules\ServiceModule.cs" />
+    <Compile Include="Service\UserGroupService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Service\UserServiceCore.cs" />
     <Compile Include="Service\UserServiceType.cs" />
+    <Compile Include="Utils\UserConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
@@ -325,11 +340,11 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202006100438463_V1.0.0__Initial.resx">
-      <DependentUpon>202006100438463_V1.0.0__Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202006101309013_V1.0.0__Initial.resx">
+      <DependentUpon>202006101309013_V1.0.0__Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006100442206_V1.0.1__Auditor.resx">
-      <DependentUpon>202006100442206_V1.0.1__Auditor.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202006101311182_V1.0.0__Updated_User.resx">
+      <DependentUpon>202006101311182_V1.0.0__Updated_User.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

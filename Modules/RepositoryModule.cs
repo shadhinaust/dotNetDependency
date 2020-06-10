@@ -16,6 +16,11 @@ namespace RestApi.Modules
                 .RegisterType<GroupRepository>()
                 .As<IGroupRepository>()
                 .SingleInstance();
+
+            builder
+                .RegisterType<UserGroupRepository>()
+                .As<IUserGroupRepository>()
+                .SingleInstance();
         }
     }
 }

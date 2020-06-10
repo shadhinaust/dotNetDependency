@@ -30,13 +30,7 @@ namespace RestApi.Model.Map
 
             this.Property(loginHistory => loginHistory.UserId)
                 .HasColumnName("user_id")
-                .HasColumnType("bigint")
-                .IsRequired();
-
-            this.HasRequired<User>(user => user.User)
-                .WithMany(loginHistory => loginHistory.LoginHistories)
-                .HasForeignKey(loginHistory => loginHistory.UserId)
-                .WillCascadeOnDelete();
+                .HasColumnType("bigint");
         }
     }
 }

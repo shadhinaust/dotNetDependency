@@ -13,7 +13,7 @@ namespace RestApi.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202006100438463_V1.0.0__Initial"; }
+            get { return "202006101309013_V1.0.0__Initial"; }
         }
         
         string IMigrationMetadata.Source

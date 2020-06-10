@@ -2,6 +2,7 @@
 using RestApi.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RestApi.Repository
 {
@@ -14,7 +15,21 @@ namespace RestApi.Repository
 
         public List<Group> GetAll()
         {
-            throw new NotImplementedException();
+            using (var ctx = new EntityContext())
+            {
+                return ctx.Group.ToList();
+            }
+        }
+
+        public List<Group> GetAll(List<short> ids)
+        {
+            using (var ctx = new EntityContext())
+            {
+                return ctx.Group
+                    .Where(group => ids.Contains(group.Id))
+                    .Distinct()
+                    .ToList();
+            }
         }
 
         public Group GetOne(short id)

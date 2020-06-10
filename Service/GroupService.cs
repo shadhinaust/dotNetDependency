@@ -24,6 +24,11 @@ namespace RestApi.Service
             throw new NotImplementedException();
         }
 
+        public List<Group> GetAllGroups(List<short> ids)
+        {
+            return _groupRepository.GetAll(ids);
+        }
+
         public Group GetGroup(short id)
         {
             return _groupRepository.GetOne(id);

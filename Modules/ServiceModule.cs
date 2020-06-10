@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using RestApi.Service;
-using RestApi.ServiceFacade;
 
 namespace RestApi.Modules
 {
@@ -20,6 +19,11 @@ namespace RestApi.Modules
             builder
                 .RegisterType<GroupService>()
                 .As<IGroupService>()
+                .SingleInstance();
+
+            builder
+                .RegisterType<UserGroupService>()
+                .As<IUserGroupService>()
                 .SingleInstance();
         }
     }

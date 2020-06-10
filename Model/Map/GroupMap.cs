@@ -22,13 +22,19 @@ namespace RestApi.Model.Map
             this.Property(group => group.Description)
                 .HasColumnName("description")
                 .HasColumnType("nvarchar")
-                .HasMaxLength(128);
+                .HasMaxLength(128)
+                .IsOptional();
 
             this.Property(group => group.Status)
                 .HasColumnName("status")
                 .HasColumnType("nvarchar")
                 .HasMaxLength(8)
                 .IsRequired();
+
+            this.HasMany(user => user.UserGroups)
+                .WithRequired(userGroup => userGroup.Group)
+                .HasForeignKey(userGroup => userGroup.GroupId)
+                .WillCascadeOnDelete();
         }
     }
 }

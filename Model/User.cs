@@ -25,10 +25,6 @@ namespace RestApi.Model
 
         public ICollection<LoginHistory> LoginHistories { get; set; }
 
-        public ICollection<Group> Groups { get; set; }
-
-        public ICollection<Role> Roles { get; set; }
-
         public Auditor Auditor { get; set; }
 
         public User()

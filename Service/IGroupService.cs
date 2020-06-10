@@ -9,6 +9,8 @@ namespace RestApi.Service
 
         List<Group> GetAllGroups();
 
+        List<Group> GetAllGroups(List<short> ids);
+
         Group SaveGroup(User user);
 
         Group UpdateGroup(Group user);

@@ -3,12 +3,12 @@ using Microsoft.Ajax.Utilities;
 using RestApi.Dto;
 using RestApi.Model;
 using RestApi.Service;
-using RestApi.ServiceFacade;
+using RestApi.Service.Facade;
+using RestApi.Utils;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Web.Http;
-
 
 namespace RestApi.Controllers
 {
@@ -17,7 +17,8 @@ namespace RestApi.Controllers
         private readonly IUserService _userService;
         private readonly IUserServiceFacade _userServiceFacade;
 
-        public UserController(IUserServiceFacade userServiceFacade, IIndex<UserServiceType, IUserService> userService)
+        public UserController(IUserServiceFacade userServiceFacade,
+            IIndex<UserServiceType, IUserService> userService)
         {
             this._userService = userService[UserServiceType.UserService];
             this._userServiceFacade = userServiceFacade;
@@ -37,17 +38,7 @@ namespace RestApi.Controllers
             List<UserDto> response = new List<UserDto>();
             _userService.GetAllUsers().ForEach(user =>
             {
-                List<RoleDto> roles = new List<RoleDto>();
-                user.Roles.ForEach(role => {
-                    roles.Add(new RoleDto() { Name = role.Name, Description = role.Description, Status = role.Status });
-                });
-
-                List<GroupDto> groups = new List<GroupDto>();
-                user.Groups.ForEach(group => {
-                    groups.Add(new GroupDto() { Name = group.Name, Description = group.Description, Status = group.Status });
-                });
-
-                response.Add(new UserDto() { Name = user.Name, Email = user.Email, Status = user.Status, Roles = roles, Groups = groups });
+                response.Add(new UserDto() { Name = user.Name, Email = user.Email, Status = user.Status});
             });
             return Content(HttpStatusCode.OK, response);
         }
@@ -63,12 +54,16 @@ namespace RestApi.Controllers
         [Route("api/user")]
         public IHttpActionResult PostUser([FromBody] UserDto userDto)
         {
-            return Content(HttpStatusCode.OK, _userService.SaveUser(new User() 
+            Auditor auditor = new Auditor() { CreatedBy = "development", CreatedAt = DateTime.Now, ModifiedBy = "development", ModifiedAt = DateTime.Now };
+            User user = new User() { Name = userDto.Name, Email = userDto.Email, Password = userDto.Password, Status = userDto.Status };
+            userDto.UserGroups.ForEach(usrGroup =>
             {
-                Name = userDto.Name,
-                Email = userDto.Email,
-                Status = userDto.Status
-            }));
+                UserGroup userGroup = new UserGroup() { GroupId = usrGroup.GroupId };
+                user.UserGroups.Add(userGroup);
+            });
+
+            user = _userService.SaveUser(user);
+            return Content(HttpStatusCode.OK, UserConverter.ToUserDto(user));
         }
 
         [HttpPut]
@@ -96,9 +91,7 @@ namespace RestApi.Controllers
         [Route("api/user/group/{groupId}/users")]
         public IHttpActionResult GetUsers(short groupId)
         {
-            List<UserDto> users = _userServiceFacade.GetAllUsersByGroupId(groupId)
-                .Select(user => new UserDto() { Name = user.Name, Email = user.Email, Status = user.Status })
-                .ToList();
+            List<UserDto> users = _userServiceFacade.GetAllUsersByGroupId(groupId);
             return Content(HttpStatusCode.OK, users);
         }
     }

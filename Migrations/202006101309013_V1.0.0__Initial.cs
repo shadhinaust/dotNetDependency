@@ -60,7 +60,7 @@
                 c => new
                     {
                         id = c.Long(nullable: false, identity: true),
-                        user_id = c.Long(nullable: false),
+                        user_id = c.Long(),
                         group_Id = c.Short(nullable: false),
                         created_by = c.String(nullable: false, maxLength: 256),
                         created_at = c.DateTime(nullable: false),
@@ -68,8 +68,8 @@
                         modified_at = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.id)
-                .ForeignKey("dbo.group", t => t.group_Id, cascadeDelete: true)
                 .ForeignKey("dbo.user", t => t.user_id, cascadeDelete: true)
+                .ForeignKey("dbo.group", t => t.group_Id, cascadeDelete: true)
                 .Index(t => t.user_id)
                 .Index(t => t.group_Id);
             
@@ -81,8 +81,8 @@
                         name = c.String(nullable: false, maxLength: 32),
                         email = c.String(nullable: false, maxLength: 256),
                         password = c.String(nullable: false, maxLength: 256),
-                        reset_code = c.Int(nullable: false),
-                        login_attempt = c.Long(nullable: false),
+                        reset_code = c.Int(),
+                        login_attempt = c.Long(),
                         status = c.String(nullable: false, maxLength: 8),
                         created_by = c.String(nullable: false, maxLength: 256),
                         created_at = c.DateTime(nullable: false),
@@ -131,10 +131,10 @@
         
         public override void Down()
         {
+            DropForeignKey("dbo.user_group", "group_Id", "dbo.group");
             DropForeignKey("dbo.user_group", "user_id", "dbo.user");
             DropForeignKey("dbo.session", "user_id", "dbo.user");
             DropForeignKey("dbo.login_history", "user_id", "dbo.user");
-            DropForeignKey("dbo.user_group", "group_Id", "dbo.group");
             DropForeignKey("dbo.group_role", "role_id", "dbo.role");
             DropForeignKey("dbo.group_role", "group_id", "dbo.group");
             DropIndex("dbo.session", new[] { "user_id" });

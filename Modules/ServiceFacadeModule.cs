@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using RestApi.ServiceFacade;
+using RestApi.Service.Facade;
 
 namespace RestApi.Modules
 {
