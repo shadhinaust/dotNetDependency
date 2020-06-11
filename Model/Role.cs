@@ -13,13 +13,16 @@ namespace RestApi.Model
 
         public string Status { get; set; }
 
+        public ICollection<UserRole> UserRoles { get; set; }
+
         public ICollection<GroupRole> GroupRoles { get; set; }
+
+        public ICollection<RolePermission> RolePermissions { get; set; }
 
         public Auditor Auditor { get; set; }
 
         public Role()
         {
-            this.GroupRoles = new List<GroupRole>();
             this.Auditor = new Auditor() { CreatedBy = "development", CreatedAt = DateTime.Now, ModifiedBy = "development", ModifiedAt = DateTime.Now };
         }
     }

@@ -75,9 +75,9 @@
             User_8.UserGroups = new List<UserGroup>() { UserGroup_19 };
             User_9.UserGroups = new List<UserGroup>() { UserGroup_20 };
 
-            Group_1.UserGroups = new List<UserGroup>() { UserGroup_1, UserGroup_4, UserGroup_7, UserGroup_10, UserGroup_13, UserGroup_15 };
+            /*Group_1.UserGroups = new List<UserGroup>() { UserGroup_1, UserGroup_4, UserGroup_7, UserGroup_10, UserGroup_13, UserGroup_15 };
             Group_1.UserGroups = new List<UserGroup>() { UserGroup_2, UserGroup_5, UserGroup_8, UserGroup_11, UserGroup_14, UserGroup_16, UserGroup_17 };
-            Group_1.UserGroups = new List<UserGroup>() { UserGroup_3, UserGroup_6, UserGroup_9, UserGroup_12, UserGroup_19, UserGroup_20 };
+            Group_1.UserGroups = new List<UserGroup>() { UserGroup_3, UserGroup_6, UserGroup_9, UserGroup_12, UserGroup_19, UserGroup_20 };*/
 
             // GroupRoles
             GroupRole GroupRole_1 = new GroupRole() { Id = 1, GroupId = 1, RoleId = 1 };
@@ -94,9 +94,9 @@
             Group_2.GroupRoles = new List<GroupRole>() { GroupRole_4, GroupRole_5 };
             Group_3.GroupRoles = new List<GroupRole>() { GroupRole_6 };
 
-            Role_1.GroupRoles = new List<GroupRole>() { GroupRole_1 };
+            /*Role_1.GroupRoles = new List<GroupRole>() { GroupRole_1 };
             Role_2.GroupRoles = new List<GroupRole>() { GroupRole_2, GroupRole_4 };
-            Role_3.GroupRoles = new List<GroupRole>() { GroupRole_3, GroupRole_5, GroupRole_6 };
+            Role_3.GroupRoles = new List<GroupRole>() { GroupRole_3, GroupRole_5, GroupRole_6 };*/
 
 
             ctx.Role.AddOrUpdate(role => role.Id, Role_1);

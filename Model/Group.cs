@@ -21,8 +21,6 @@ namespace RestApi.Model
 
         public Group()
         {
-            this.UserGroups = new List<UserGroup>();
-            this.GroupRoles = new List<GroupRole>();
             this.Auditor = new Auditor() { CreatedBy = "development", CreatedAt = DateTime.Now, ModifiedBy = "development", ModifiedAt = DateTime.Now };
         }
     }

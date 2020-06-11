@@ -31,9 +31,14 @@ namespace RestApi.Model.Map
                 .HasMaxLength(8)
                 .IsRequired();
 
-            this.HasMany(user => user.UserGroups)
-                .WithRequired(userGroup => userGroup.Group)
-                .HasForeignKey(userGroup => userGroup.GroupId)
+            this.HasMany<UserGroup>(group => group.UserGroups)
+                .WithRequired(groupRole => groupRole.Group)
+                .HasForeignKey(groupRole => groupRole.GroupId)
+                .WillCascadeOnDelete();
+
+            this.HasMany<GroupRole>(group => group.GroupRoles)
+                .WithRequired(groupRole => groupRole.Group)
+                .HasForeignKey(groupRole => groupRole.GroupId)
                 .WillCascadeOnDelete();
         }
     }

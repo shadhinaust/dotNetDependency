@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity.ModelConfiguration;
 
 namespace RestApi.Model.Map
 {
@@ -33,6 +29,21 @@ namespace RestApi.Model.Map
                 .HasColumnType("nvarchar")
                 .HasMaxLength(8)
                 .IsRequired();
+
+            this.HasMany<UserRole>(role => role.UserRoles)
+                .WithRequired(userRole => userRole.Role)
+                .HasForeignKey(userRole => userRole.RoleId)
+                .WillCascadeOnDelete();
+
+            this.HasMany<GroupRole>(role => role.GroupRoles)
+                .WithRequired(groupRole => groupRole.Role)
+                .HasForeignKey(groupRole => groupRole.RoleId)
+                .WillCascadeOnDelete();
+
+            this.HasMany<RolePermission>(role => role.RolePermissions)
+                .WithRequired(rolePermission => rolePermission.Role)
+                .HasForeignKey(rolePermission => rolePermission.RoleId)
+                .WillCascadeOnDelete();
         }
     }
 }

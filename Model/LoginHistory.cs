@@ -8,6 +8,8 @@ namespace RestApi.Model
 
         public DateTime AccessTime { get; set; }
 
+        public string Role { get; set; }
+
         public string Status { get; set; }
 
         public long SessionId { get; set; }

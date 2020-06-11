@@ -146,7 +146,7 @@ namespace RestApi.Repository
                 var groups = ctx.Group;
 
                 // 1st
-                var uGrps = groups
+/*                var uGrps = groups
                     .Include(grp => grp.UserGroups)
                     .Where(grp => grp.Id == group.Id)
                     .FirstOrDefault()
@@ -156,7 +156,7 @@ namespace RestApi.Repository
 
                 var allUsers = users.Where(user => uGrps
                     .Contains(user.Id))
-                    .ToList();
+                    .ToList();*/
 
                 // 2nd 
                 var allUsers_2 = users.Where(user => userGroups

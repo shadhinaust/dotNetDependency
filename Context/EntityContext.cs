@@ -14,17 +14,35 @@ namespace RestApi.Context
     {
         public DbSet<Role> Role { get; set; }
 
+        public DbSet<SourceRules> SourceRules { get; set; }
+
+        public DbSet<SpeechRules> SpeechRules { get; set; }
+
+        public DbSet<AccessControl> AccessControl { get; set; }
+
+        public DbSet<RolePermission> RolePermission { get; set; }
+
         public DbSet<Group> Group { get; set; }
 
+        public DbSet<GroupRole> GroupRole { get; set; }
+
         public DbSet<User> User { get; set; }
+
+        public DbSet<UserRole> UserRoles { get; set; }
+
+        public DbSet<UserGroup> UserGroup { get; set; }
 
         public DbSet<LoginHistory> LoginHistory { get; set; }
 
         public DbSet<Session> Session { get; set; }
 
-        public DbSet<UserGroup> UserGroup { get; set; }
+        public DbSet<Source> Source { get; set; }
 
-        public DbSet<GroupRole> GroupRole { get; set; }
+        public DbSet<Intermediate> Intermediate { get; set; }
+
+        public DbSet<Deciphered> Deciphered { get; set; }
+
+        public DbSet<Log> Log { get; set; }
 
         public EntityContext() : base("sqlserver")
         {
@@ -57,13 +75,22 @@ namespace RestApi.Context
                 .HasColumnType("datetime")
                 .IsRequired();
 
-            modelBuilder.Configurations.Add(new UserMap());
-            modelBuilder.Configurations.Add(new GroupMap());
             modelBuilder.Configurations.Add(new RoleMap());
+            modelBuilder.Configurations.Add(new SourceRulesMap());
+            modelBuilder.Configurations.Add(new SpeechRulesMap());
+            modelBuilder.Configurations.Add(new AccessControlMap());
+            modelBuilder.Configurations.Add(new RolePermissionMap());
+            modelBuilder.Configurations.Add(new GroupMap());
+            modelBuilder.Configurations.Add(new GroupRoleMap());
+            modelBuilder.Configurations.Add(new UserMap());
+            modelBuilder.Configurations.Add(new UserGroupMap());
+            modelBuilder.Configurations.Add(new UserRoleMap());
             modelBuilder.Configurations.Add(new SessionMap());
             modelBuilder.Configurations.Add(new LoginHistoryMap());
-            modelBuilder.Configurations.Add(new UserGroupMap());
-            modelBuilder.Configurations.Add(new GroupRoleMap());
+            modelBuilder.Configurations.Add(new SourceMap());
+            modelBuilder.Configurations.Add(new IntermediateMap());
+            modelBuilder.Configurations.Add(new DecipheredMap());
+            modelBuilder.Configurations.Add(new LogMap());
         }
 
         public override int SaveChanges()

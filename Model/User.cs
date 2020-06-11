@@ -21,6 +21,8 @@ namespace RestApi.Model
 
         public ICollection<UserGroup> UserGroups { get; set; }
 
+        public ICollection<UserRole> UserRoles { get; set; }
+
         public ICollection<Session> Sessions { get; set; }
 
         public ICollection<LoginHistory> LoginHistories { get; set; }
@@ -29,9 +31,6 @@ namespace RestApi.Model
 
         public User()
         {
-            this.UserGroups = new List<UserGroup>();
-            this.Sessions = new List<Session>();
-            this.LoginHistories = new List<LoginHistory>();
             this.Auditor = new Auditor() { CreatedBy = "development", CreatedAt = DateTime.Now, ModifiedBy = "development", ModifiedAt = DateTime.Now };
         }
     }

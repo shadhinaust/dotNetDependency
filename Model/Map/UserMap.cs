@@ -55,6 +55,11 @@ namespace RestApi.Model.Map
                 .HasForeignKey(userGroup => userGroup.UserId)
                 .WillCascadeOnDelete();
 
+            this.HasMany<UserRole>(user => user.UserRoles)
+                .WithRequired(userRole => userRole.User)
+                .HasForeignKey(userRole => userRole.UserId)
+                .WillCascadeOnDelete();
+
             this.HasMany<Session>(user => user.Sessions)
                 .WithRequired(session => session.User)
                 .HasForeignKey(session => session.UserId)

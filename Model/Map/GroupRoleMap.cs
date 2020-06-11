@@ -15,21 +15,13 @@ namespace RestApi.Model.Map
 
             this.Property(groupRole => groupRole.GroupId)
                 .HasColumnName("group_id")
-                .HasColumnType("smallint");
-
-            this.HasRequired<Group>(group => group.Group)
-                .WithMany(groupRole => groupRole.GroupRoles)
-                .HasForeignKey(groupRole => groupRole.GroupId)
-                .WillCascadeOnDelete();
+                .HasColumnType("smallint")
+                .IsRequired();
 
             this.Property(groupRole => groupRole.RoleId)
                 .HasColumnName("role_id")
-                .HasColumnType("smallint");
-
-            this.HasRequired<Role>(role => role.Role)
-                .WithMany(groupRole => groupRole.GroupRoles)
-                .HasForeignKey(groupRole => groupRole.RoleId)
-                .WillCascadeOnDelete();
+                .HasColumnType("smallint")
+                .IsRequired();
         }
     }
 }
