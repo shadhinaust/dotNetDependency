@@ -285,10 +285,14 @@
     <Compile Include="Migrations\202006111032578_V1.0.4__Added_New_Entity.designer.cs">
       <DependentUpon>202006111032578_V1.0.4__Added_New_Entity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006111122066_V1.0.5__Renamed_Entity.cs" />
+    <Compile Include="Migrations\202006111122066_V1.0.5__Renamed_Entity.designer.cs">
+      <DependentUpon>202006111122066_V1.0.5__Renamed_Entity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\AccessControl.cs" />
     <Compile Include="Model\Auditor.cs" />
-    <Compile Include="Model\Deciphered.cs" />
+    <Compile Include="Model\Decoded.cs" />
     <Compile Include="Model\Group.cs" />
     <Compile Include="Model\GroupRole.cs" />
     <Compile Include="Model\Intermediate.cs" />
@@ -296,7 +300,7 @@
     <Compile Include="Model\LoginHistory.cs" />
     <Compile Include="Model\Map\AccessControlMap.cs" />
     <Compile Include="Model\Map\AuditorMap.cs" />
-    <Compile Include="Model\Map\DecipheredMap.cs" />
+    <Compile Include="Model\Map\DecodedMap.cs" />
     <Compile Include="Model\Map\GroupMap.cs" />
     <Compile Include="Model\Map\GroupRoleMap.cs" />
     <Compile Include="Model\Map\IntermediateMap.cs" />
@@ -377,6 +381,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006111032578_V1.0.4__Added_New_Entity.resx">
       <DependentUpon>202006111032578_V1.0.4__Added_New_Entity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006111122066_V1.0.5__Renamed_Entity.resx">
+      <DependentUpon>202006111122066_V1.0.5__Renamed_Entity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

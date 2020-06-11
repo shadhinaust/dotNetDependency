@@ -12,7 +12,7 @@
 
         public Source Source { get; set; }
 
-        public Deciphered Deciphered { get; set; }
+        public Decoded Deciphered { get; set; }
 
         public Auditor Auditor { get; set; }
     }

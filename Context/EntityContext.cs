@@ -40,7 +40,7 @@ namespace RestApi.Context
 
         public DbSet<Intermediate> Intermediate { get; set; }
 
-        public DbSet<Deciphered> Deciphered { get; set; }
+        public DbSet<Decoded> Deciphered { get; set; }
 
         public DbSet<Log> Log { get; set; }
 
@@ -89,7 +89,7 @@ namespace RestApi.Context
             modelBuilder.Configurations.Add(new LoginHistoryMap());
             modelBuilder.Configurations.Add(new SourceMap());
             modelBuilder.Configurations.Add(new IntermediateMap());
-            modelBuilder.Configurations.Add(new DecipheredMap());
+            modelBuilder.Configurations.Add(new DecodedMap());
             modelBuilder.Configurations.Add(new LogMap());
         }
 

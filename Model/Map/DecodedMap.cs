@@ -2,11 +2,11 @@
 
 namespace RestApi.Model.Map
 {
-    public class DecipheredMap: EntityTypeConfiguration<Deciphered>
+    public class DecodedMap: EntityTypeConfiguration<Decoded>
     {
-        public DecipheredMap()
+        public DecodedMap()
         {
-            this.ToTable("deciphered")
+            this.ToTable("decoded")
                 .HasKey(deciphered => deciphered.Id);
 
             this.Property(deciphered => deciphered.Id)

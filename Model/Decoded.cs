@@ -1,6 +1,6 @@
 ﻿namespace RestApi.Model
 {
-    public class Deciphered
+    public class Decoded
     {
         public long Id { get; set; }
 
