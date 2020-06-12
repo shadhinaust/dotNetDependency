@@ -93,7 +93,7 @@ namespace RestApi.Context
             modelBuilder.Configurations.Add(new LogMap());
         }
 
-        public override int SaveChanges()
+        /*public override int SaveChanges()
         {
             AddTimestamps();
             return base.SaveChanges();
@@ -123,6 +123,6 @@ namespace RestApi.Context
                 ((Auditor)entity.Entity).ModifiedAt = now;
                 ((Auditor)entity.Entity).ModifiedBy = userName;
             });
-        }
+        }*/
     }
 }

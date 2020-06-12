@@ -11,5 +11,11 @@ namespace RestApi.Model
         public string ModifiedBy{ get; set; }
 
         public DateTime ModifiedAt { get; set; }
+
+        public Auditor()
+        {
+            this.CreatedBy = this.ModifiedBy = "dev";
+            this.CreatedAt = this.ModifiedAt = DateTime.Now;
+        }
     }
 }

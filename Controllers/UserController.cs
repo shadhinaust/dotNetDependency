@@ -8,6 +8,7 @@ using RestApi.Service.Facade;
 using RestApi.Utils;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web.Http;
 
@@ -57,8 +58,18 @@ namespace RestApi.Controllers
         [Route("api/user")]
         public IHttpActionResult PostUser([FromBody] UserDto userDto)
         {
-            Auditor auditor = new Auditor() { CreatedBy = "development", CreatedAt = DateTime.Now, ModifiedBy = "development", ModifiedAt = DateTime.Now };
-            User user = new User() { Name = userDto.Name, Email = userDto.Email, Password = userDto.Password, Status = userDto.Status };
+            // Auditor auditor = new Auditor() { CreatedBy = "development", CreatedAt = DateTime.Now, ModifiedBy = "development", ModifiedAt = DateTime.Now };
+            User user = new User()
+            {
+                Name = userDto.Name,
+                Email = userDto.Email,
+                Password = userDto.Password,
+                Status = userDto.Status,
+                UserGroups = new List<UserGroup>(),
+                UserRoles = new List<UserRole>(),
+                Sessions = new List<Session>(),
+                LoginHistories = new List<LoginHistory>()
+            };
             userDto.UserGroups.ForEach(usrGroup =>
             {
                 UserGroup userGroup = new UserGroup() { GroupId = usrGroup.GroupId };
@@ -73,13 +84,19 @@ namespace RestApi.Controllers
         [Route("api/user/{id}")]
         public IHttpActionResult PutUser(long id, [FromBody] UserDto userDto)
         {
-            return Content(HttpStatusCode.OK, _userService.UpdateUser(new User()
+            User user = _userService.GetUser(id);
+            user.Name = userDto.Name;
+            user.Email = userDto.Email;
+            user.Password = userDto.Password;
+            user.Status = userDto.Status;
+
+            user.UserGroups.ForEach(usrGroup =>
             {
-                Id = id,
-                Name = userDto.Name,
-                Email = userDto.Email,
-                Status = userDto.Status
-            }));
+                usrGroup.GroupId = userDto.UserGroups[0].GroupId;
+            });
+
+            user = _userService.UpdateUser(user);
+            return Content(HttpStatusCode.OK, user);
         }
 
         [HttpDelete]

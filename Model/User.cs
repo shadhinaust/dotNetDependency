@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 
 namespace RestApi.Model
@@ -33,7 +32,7 @@ namespace RestApi.Model
 
         public User()
         {
-            this.Auditor = new Auditor() { CreatedBy = "development", CreatedAt = DateTime.Now, ModifiedBy = "development", ModifiedAt = DateTime.Now };
+            this.Auditor = new Auditor();
         }
     }
 }

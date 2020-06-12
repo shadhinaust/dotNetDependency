@@ -5,6 +5,7 @@ using RestApi.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 
 namespace RestApi.Repository
@@ -209,8 +210,20 @@ namespace RestApi.Repository
             using (var ctx = new EntityContext())
             {
                 ctx.Database.Log = Console.WriteLine;
-                ctx.User.Attach(user);
-                ctx.Entry(user).State = EntityState.Modified;
+
+                user.UserGroups.ForEach(userGroup =>
+                {
+                    ctx.UserGroup.AddOrUpdate(userGroup);
+                });
+
+                /*                ctx.Entry(user).State = EntityState.Modified;
+                                user.UserGroups.ForEach(ug =>
+                                {
+                                    ctx.Entry(ug).State = EntityState.Modified;
+                                });*/
+
+                ctx.User.AddOrUpdate(user);
+
                 ctx.SaveChanges();
                 return user;
             }

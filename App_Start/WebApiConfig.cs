@@ -50,8 +50,8 @@ namespace RestApi
 
 
             // Service Locator
-            var commonServiceLocator = new AutofacServiceLocator(container);
-            ServiceLocator.SetLocatorProvider(()=>commonServiceLocator);
+/*            var commonServiceLocator = new AutofacServiceLocator(container);
+            ServiceLocator.SetLocatorProvider(()=>commonServiceLocator);*/
 
             // Json Serialization
 /*            config

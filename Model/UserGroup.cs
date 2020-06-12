@@ -1,5 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace RestApi.Model
 {
@@ -22,7 +21,7 @@ namespace RestApi.Model
 
         public UserGroup()
         {
-            this.Auditor = new Auditor() { CreatedBy = "development", CreatedAt = DateTime.Now, ModifiedBy = "development", ModifiedAt = DateTime.Now };
+            this.Auditor = new Auditor();
         }
     }
 }
