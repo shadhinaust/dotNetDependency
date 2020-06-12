@@ -11,15 +11,21 @@ namespace RestApi.Repository
 {
     public class UserRepository : IUserRepository
     {
-        readonly static Dictionary<long, User> _users = new Dictionary<long, User>();
         public void Delete(long id)
         {
-            var ctx = new EntityContext();
-            ctx.Database.Log = Console.WriteLine;
-            var user = ctx.User.Find(id);
-            ctx.User.Remove(user);
-            ctx.SaveChanges();
-            ctx.Dispose();
+            using (var ctx = new EntityContext())
+            {
+                ctx.Database.Log = Console.WriteLine;
+                var user = ctx.User
+                    .Where(usr => usr.Id == id)
+                    .Include(usr => usr.UserGroups)
+                    .Include(usr => usr.UserRoles)
+                    .Include(usr => usr.Sessions)
+                    .Include(usr => usr.LoginHistories)
+                    .FirstOrDefault();
+                ctx.User.Remove(user);
+                ctx.SaveChanges();
+            }
         }
 
         public List<User> GetAll()
@@ -172,14 +178,15 @@ namespace RestApi.Repository
 
         public User GetOne(long id)
         {
-            var ctx = new EntityContext();
-            ctx.Database.Log = Console.WriteLine;
-            var user = ctx.User
-                .Where(usr => usr.Id == id)
-                .FirstOrDefault();
-            ctx.Entry(user).Collection(usr => usr.UserGroups).Load();
-            ctx.Dispose();
-            return user;
+            using(var ctx = new EntityContext())
+            {
+                ctx.Database.Log = Console.WriteLine;
+                var user = ctx.User
+                    .Where(usr => usr.Id == id)
+                    .Include(usr => usr.UserGroups)
+                    .FirstOrDefault<User>();
+                return user;
+            }
         }
 
         public User Save(User user)
@@ -199,13 +206,14 @@ namespace RestApi.Repository
 
         public User Update(User user)
         {
-            var ctx = new EntityContext();
-            ctx.Database.Log = Console.WriteLine;
-            ctx.User.Attach(user);
-            ctx.Entry(user).State = EntityState.Modified;
-            ctx.SaveChanges();
-            ctx.Dispose();
-            return user;
+            using (var ctx = new EntityContext())
+            {
+                ctx.Database.Log = Console.WriteLine;
+                ctx.User.Attach(user);
+                ctx.Entry(user).State = EntityState.Modified;
+                ctx.SaveChanges();
+                return user;
+            }
         }
     }
 }

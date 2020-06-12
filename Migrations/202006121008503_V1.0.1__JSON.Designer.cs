@@ -7,13 +7,13 @@ namespace RestApi.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class V105__Renamed_Entity : IMigrationMetadata
+    public sealed partial class V101__JSON : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(V105__Renamed_Entity));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(V101__JSON));
         
         string IMigrationMetadata.Id
         {
-            get { return "202006111122066_V1.0.5__Renamed_Entity"; }
+            get { return "202006121008503_V1.0.1__JSON"; }
         }
         
         string IMigrationMetadata.Source

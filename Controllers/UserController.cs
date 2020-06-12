@@ -1,5 +1,6 @@
 ﻿using Autofac.Features.Indexed;
 using Microsoft.Ajax.Utilities;
+using Newtonsoft.Json;
 using RestApi.Dto;
 using RestApi.Model;
 using RestApi.Service;
@@ -47,7 +48,9 @@ namespace RestApi.Controllers
         [Route("api/user/{id}")]
         public IHttpActionResult GetUser(int id)
         {
-            return Content(HttpStatusCode.OK, _userService.GetUser(id));
+            User user = _userService.GetUser(id);
+            var json = JsonConvert.SerializeObject(_userService.GetUser(id));
+            return Content(HttpStatusCode.OK, user);
         }
 
         [HttpPost]

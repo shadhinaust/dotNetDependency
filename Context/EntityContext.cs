@@ -44,9 +44,9 @@ namespace RestApi.Context
 
         public DbSet<Log> Log { get; set; }
 
-        public EntityContext() : base("sqlserver")
+        public EntityContext() : base("localhost:sqlserver")
         {
-
+            this.Configuration.LazyLoadingEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -2,6 +2,7 @@
 using Autofac.Extras.CommonServiceLocator;
 using Autofac.Integration.WebApi;
 using CommonServiceLocator;
+using Newtonsoft.Json;
 using RestApi.Modules;
 using System.Reflection;
 using System.Web.Http;
@@ -52,6 +53,18 @@ namespace RestApi
             var commonServiceLocator = new AutofacServiceLocator(container);
             ServiceLocator.SetLocatorProvider(()=>commonServiceLocator);
 
+            // Json Serialization
+/*            config
+                .Formatters
+                .JsonFormatter
+                .SerializerSettings
+                .PreserveReferencesHandling = PreserveReferencesHandling.None;
+
+            config
+                .Formatters
+                .JsonFormatter
+                .SerializerSettings
+                .ReferenceLoopHandling = ReferenceLoopHandling.Ignore;*/
 
             // Routing
             config.MapHttpAttributeRoutes();

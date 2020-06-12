@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace RestApi.Model
 {
+    [JsonObject(IsReference = true)]
     public class User
     {
         public long Id { get; set; }
@@ -19,13 +21,13 @@ namespace RestApi.Model
 
         public string Status { get; set; }
 
-        public ICollection<UserGroup> UserGroups { get; set; }
+        public virtual ICollection<UserGroup> UserGroups { get; set; }
 
-        public ICollection<UserRole> UserRoles { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
 
-        public ICollection<Session> Sessions { get; set; }
+        public virtual ICollection<Session> Sessions { get; set; }
 
-        public ICollection<LoginHistory> LoginHistories { get; set; }
+        public virtual ICollection<LoginHistory> LoginHistories { get; set; }
 
         public Auditor Auditor { get; set; }
 

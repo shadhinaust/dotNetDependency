@@ -15,7 +15,7 @@ namespace RestApi.Dto
 
         public ICollection<Group> Groups { get; set; }
 
-        public ICollection<UserGroup> UserGroups { get; set; }
+        public List<UserGroup> UserGroups { get; set; }
 
         public ICollection<Session> Sessions { get; set; }
 

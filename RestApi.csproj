@@ -131,6 +131,9 @@
     <Reference Include="MySql.Data.Entity.EF6, Version=6.10.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>packages\MySql.Data.Entity.6.10.9\lib\net452\MySql.Data.Entity.EF6.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -200,9 +203,6 @@
       <Private>True</Private>
       <HintPath>packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http">
     </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -263,31 +263,20 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Dto\GroupDto.cs" />
     <Compile Include="Dto\RoleDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202006101309013_V1.0.0__Initial.cs" />
-    <Compile Include="Migrations\202006101309013_V1.0.0__Initial.designer.cs">
-      <DependentUpon>202006101309013_V1.0.0__Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202006120643142_V1.0.0__Initial.cs" />
+    <Compile Include="Migrations\202006120643142_V1.0.0__Initial.designer.cs">
+      <DependentUpon>202006120643142_V1.0.0__Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202006101311182_V1.0.1__Updated_User.cs" />
-    <Compile Include="Migrations\202006101311182_V1.0.1__Updated_User.designer.cs">
-      <DependentUpon>202006101311182_V1.0.1__Updated_User.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006110923252_V1.0.3__Added_New_Entity.cs" />
-    <Compile Include="Migrations\202006110923252_V1.0.3__Added_New_Entity.designer.cs">
-      <DependentUpon>202006110923252_V1.0.3__Added_New_Entity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006111032578_V1.0.4__Added_New_Entity.cs" />
-    <Compile Include="Migrations\202006111032578_V1.0.4__Added_New_Entity.designer.cs">
-      <DependentUpon>202006111032578_V1.0.4__Added_New_Entity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006111122066_V1.0.5__Renamed_Entity.cs" />
-    <Compile Include="Migrations\202006111122066_V1.0.5__Renamed_Entity.designer.cs">
-      <DependentUpon>202006111122066_V1.0.5__Renamed_Entity.cs</DependentUpon>
+    <Compile Include="Migrations\202006121008503_V1.0.1__JSON.cs" />
+    <Compile Include="Migrations\202006121008503_V1.0.1__JSON.designer.cs">
+      <DependentUpon>202006121008503_V1.0.1__JSON.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\AccessControl.cs" />
@@ -370,20 +359,11 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202006101309013_V1.0.0__Initial.resx">
-      <DependentUpon>202006101309013_V1.0.0__Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202006120643142_V1.0.0__Initial.resx">
+      <DependentUpon>202006120643142_V1.0.0__Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006101311182_V1.0.1__Updated_User.resx">
-      <DependentUpon>202006101311182_V1.0.1__Updated_User.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006110923252_V1.0.3__Added_New_Entity.resx">
-      <DependentUpon>202006110923252_V1.0.3__Added_New_Entity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006111032578_V1.0.4__Added_New_Entity.resx">
-      <DependentUpon>202006111032578_V1.0.4__Added_New_Entity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006111122066_V1.0.5__Renamed_Entity.resx">
-      <DependentUpon>202006111122066_V1.0.5__Renamed_Entity.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202006121008503_V1.0.1__JSON.resx">
+      <DependentUpon>202006121008503_V1.0.1__JSON.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
