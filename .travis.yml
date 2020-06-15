@@ -1,4 +1,6 @@
 ﻿language: csharp
+mono: 
+    - latest
 solution: RestApi.sln
 install:
   - nuget restore RestApi.sln

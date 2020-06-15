@@ -270,15 +270,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202006120643142_V1.0.0__Initial.cs" />
-    <Compile Include="Migrations\202006120643142_V1.0.0__Initial.designer.cs">
-      <DependentUpon>202006120643142_V1.0.0__Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006121008503_V1.0.1__JSON.cs" />
-    <Compile Include="Migrations\202006121008503_V1.0.1__JSON.designer.cs">
-      <DependentUpon>202006121008503_V1.0.1__JSON.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\AccessControl.cs" />
     <Compile Include="Model\Auditor.cs" />
     <Compile Include="Model\Decoded.cs" />
@@ -359,14 +350,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202006120643142_V1.0.0__Initial.resx">
-      <DependentUpon>202006120643142_V1.0.0__Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006121008503_V1.0.1__JSON.resx">
-      <DependentUpon>202006121008503_V1.0.1__JSON.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
