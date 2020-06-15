@@ -1,0 +1,6 @@
+﻿language: csharp
+solution: RestApi.sln
+install:
+  - nuget restore RestApi.sln
+script:
+  - msbuild /p:Configuration=Release RestApi.sln
